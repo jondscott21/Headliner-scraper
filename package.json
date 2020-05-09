@@ -1,0 +1,12 @@
+{
+  "name": "headliner-scraper",
+  "version": "1.0.0",
+  "main": "index.js",
+  "start": "node index.js",
+  "repository": "https://github.com/jondscott21/Headliner-scraper.git",
+  "author": "Jonathan Scott <jonathan.scott@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^3.0.4"
+  }
+}
