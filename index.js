@@ -11,6 +11,8 @@ const puppeteer = require('puppeteer');
         // let subHeadlines = document.querySelectorAll(".cd__headline");
         let subHeadlines1 = document.querySelector(".zn__column--idx-1").innerText;
         let subHeadlines2 = document.querySelector(".zn__column--idx-2").innerText;
+        subHeadlines1 = subHeadlines1.split("\n").slice(1)
+        subHeadlines2 = subHeadlines2.split("\n")
 
         return {
             headline,
