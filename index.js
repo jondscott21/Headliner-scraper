@@ -8,7 +8,6 @@ const puppeteer = require('puppeteer');
     await page.goto(URL, {waitUntil: 'networkidle2'});
     let data = await page.evaluate(() => {
         let headline = document.querySelector(".screaming-banner-text").innerText;
-        // let subHeadlines = document.querySelectorAll(".cd__headline");
         let subHeadlines1 = document.querySelector(".zn__column--idx-1").innerText;
         let subHeadlines2 = document.querySelector(".zn__column--idx-2").innerText;
         subHeadlines1 = subHeadlines1.split("\n").slice(1)
@@ -20,6 +19,7 @@ const puppeteer = require('puppeteer');
             subHeadlines2: subHeadlines2
         }
     })
+    await page.screenshot({path: 'screenshot.png'});
     console.log(data);
 
     debugger;
