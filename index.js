@@ -1,29 +1,50 @@
 const puppeteer = require('puppeteer');
 
 (async () => {
-    let URL = `https://www.cnn.com/`;
+    let CNN = `https://www.cnn.com/`;
+    let FOX = `https://www.foxnews.com/`
     let browser = await puppeteer.launch();
     let page = await browser.newPage();
 
-    await page.goto(URL, {waitUntil: 'networkidle2'});
-    let data = await page.evaluate(() => {
-        let headline = document.querySelector(".screaming-banner-text").innerText;
-        let subHeadlines1 = document.querySelector(".zn__column--idx-1").innerText;
-        let subHeadlines2 = document.querySelector(".zn__column--idx-2").innerText;
-        subHeadlines1 = subHeadlines1.split("\n")
-        subHeadlines2 = subHeadlines2.split("\n")
+    await page.goto(CNN, {waitUntil: 'networkidle2'});
+    let CNNData = await page.evaluate(() => {
+        let CNNHeadline = document.querySelector(".screaming-banner-text").innerText;
+        let CNNSubHeadlines1 = document.querySelector(".zn__column--idx-1").innerText;
+        let CNNSubHeadlines2 = document.querySelector(".zn__column--idx-2").innerText;
+        CNNSubHeadlines1 = CNNSubHeadlines1.split("\n")
+        CNNSubHeadlines2 = CNNSubHeadlines2.split("\n")
+        let CNNSubHeadlines = CNNSubHeadlines1.concat(CNNSubHeadlines2)
         let date = new Date()
 
         return {
-            headline,
-            subHeadlines1: subHeadlines1,
-            subHeadlines2: subHeadlines2,
+            CNNHeadline,
+            CNNSubHeadlines,
             date: date.toDateString(),
             time: date.toTimeString()
         }
     })
-    await page.screenshot({path: 'screenshot.png'});
-    console.log(data);
+    await page.screenshot({path: 'CNNScreenshot.png'});
+    await page.goto(FOX, {waitUntil: 'networkidle2'});
+    let FoxData = await page.evaluate(() => {
+        let FOXHeadlines = Array.from(document.querySelectorAll(".info-header")).map(el => el.innerText);
+        // let FOXSubHeadlines1 = document.querySelector(".zn__column--idx-1").innerText;
+        // let FOXSubHeadlines2 = document.querySelector(".zn__column--idx-2").innerText;
+        // FOXSubHeadlines1 = FOXSubHeadlines1.split("\n")
+        // FOXSubHeadlines2 = FOXSubHeadlines2.split("\n")
+        let date = new Date()
+        
+        return {
+            FOXHeadlines,
+            // FOXSubHeadlines1: FOXSubHeadlines1,
+            // FOXSubHeadlines2: FOXSubHeadlines2,
+            date: date.toDateString(),
+            time: date.toTimeString()
+        }
+    })
+    await page.screenshot({path: 'FOXScreenshot.png'});
+    let data = {...CNNData, ...FoxData}
+    console.log(data.FOXHeadlines[0]);
+    console.log(data.CNNHeadline);
 
     debugger;
 
