@@ -10,13 +10,16 @@ const puppeteer = require('puppeteer');
         let headline = document.querySelector(".screaming-banner-text").innerText;
         let subHeadlines1 = document.querySelector(".zn__column--idx-1").innerText;
         let subHeadlines2 = document.querySelector(".zn__column--idx-2").innerText;
-        subHeadlines1 = subHeadlines1.split("\n").slice(1)
+        subHeadlines1 = subHeadlines1.split("\n")
         subHeadlines2 = subHeadlines2.split("\n")
+        let date = new Date()
 
         return {
             headline,
             subHeadlines1: subHeadlines1,
-            subHeadlines2: subHeadlines2
+            subHeadlines2: subHeadlines2,
+            date: date.toDateString(),
+            time: date.toTimeString()
         }
     })
     await page.screenshot({path: 'screenshot.png'});
