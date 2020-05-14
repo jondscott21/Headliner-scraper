@@ -6,9 +6,11 @@ const puppeteer = require('puppeteer');
     let browser = await puppeteer.launch();
     let page = await browser.newPage();
 
+    // TODO DRY code out
     await page.goto(CNN, {waitUntil: 'networkidle2'});
     let CNNData = await page.evaluate(() => {
         let CNNHeadline = document.querySelector(".screaming-banner-text").innerText;
+        // TODO trim number of headlines?
         let CNNSubHeadlines1 = document.querySelector(".zn__column--idx-1").innerText;
         let CNNSubHeadlines2 = document.querySelector(".zn__column--idx-2").innerText;
         CNNSubHeadlines1 = CNNSubHeadlines1.split("\n")
@@ -26,6 +28,8 @@ const puppeteer = require('puppeteer');
     await page.screenshot({path: 'CNNScreenshot.png'});
     await page.goto(FOX, {waitUntil: 'networkidle2'});
     let FoxData = await page.evaluate(() => {
+        // TODO isolate main headline
+        // TODO trim number of headlines?
         let FOXHeadlines = Array.from(document.querySelectorAll(".info-header")).map(el => el.innerText);
         // let FOXSubHeadlines1 = document.querySelector(".zn__column--idx-1").innerText;
         // let FOXSubHeadlines2 = document.querySelector(".zn__column--idx-2").innerText;
