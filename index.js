@@ -16,13 +16,10 @@ const puppeteer = require('puppeteer');
         CNNSubHeadlines1 = CNNSubHeadlines1.split("\n")
         CNNSubHeadlines2 = CNNSubHeadlines2.split("\n")
         let CNNSubHeadlines = CNNSubHeadlines1.concat(CNNSubHeadlines2)
-        let date = new Date()
 
         return {
             CNNHeadline,
             CNNSubHeadlines,
-            date: date.toDateString(),
-            time: date.toTimeString()
         }
     })
     await page.screenshot({path: 'CNNScreenshot.png'});
@@ -30,25 +27,24 @@ const puppeteer = require('puppeteer');
     let FoxData = await page.evaluate(() => {
         // TODO isolate main headline
         // TODO trim number of headlines?
-        let FOXHeadlines = Array.from(document.querySelectorAll(".info-header")).map(el => el.innerText);
-        // let FOXSubHeadlines1 = document.querySelector(".zn__column--idx-1").innerText;
-        // let FOXSubHeadlines2 = document.querySelector(".zn__column--idx-2").innerText;
-        // FOXSubHeadlines1 = FOXSubHeadlines1.split("\n")
-        // FOXSubHeadlines2 = FOXSubHeadlines2.split("\n")
-        let date = new Date()
+        content = document.querySelector(".main-content").innerText
+        let FOXHeadlines = Array.from(document.querySelectorAll('.main-content .title')).map(el => el.innerText);
         
         return {
             FOXHeadlines,
-            // FOXSubHeadlines1: FOXSubHeadlines1,
-            // FOXSubHeadlines2: FOXSubHeadlines2,
-            date: date.toDateString(),
-            time: date.toTimeString()
         }
     })
     await page.screenshot({path: 'FOXScreenshot.png'});
-    let data = {...CNNData, ...FoxData}
-    console.log(data.FOXHeadlines[0]);
-    console.log(data.CNNHeadline);
+    let date = new Date()
+    let data = {
+        ...CNNData, 
+        ...FoxData, 
+        date: date.toDateString(),
+        time: date.toTimeString()
+    }
+    // console.log(data.FOXHeadlines);
+    // console.log(data.CNNHeadline);
+    console.log(data);
 
     debugger;
 
