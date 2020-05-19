@@ -27,7 +27,7 @@ const puppeteer = require('puppeteer');
     let FoxData = await page.evaluate(() => {
         // TODO isolate main headline
         // TODO trim number of headlines?
-        content = document.querySelector(".main-content").innerText
+        // let content = document.querySelector(".main-content").innerText
         let FOXHeadlines = Array.from(document.querySelectorAll('.main-content .title')).map(el => el.innerText);
         
         return {
