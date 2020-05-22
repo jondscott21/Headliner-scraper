@@ -29,7 +29,9 @@ const fs = require('fs');
     let FoxData = await page.evaluate(() => {
         // TODO isolate main headline
         // TODO trim number of headlines?
+        let kicker = document.querySelector('.kicker-text').innerText
         let FOXHeadlines = Array.from(document.querySelectorAll('.main-content .title')).map(el => el.innerText);
+        kicker.length > 0 ? FOXHeadlines[0] = `${kicker}: ${FOXHeadlines[0]}` : null
         
         return {
             FOXHeadlines,
