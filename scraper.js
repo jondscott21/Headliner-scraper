@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 const fs = require('fs');
 
 
-(async () => {
+const scraper = (async () => {
     let CNN = `https://www.cnn.com/`;
     let FOX = `https://www.foxnews.com/`
     let browser = await puppeteer.launch();
@@ -55,3 +55,5 @@ const fs = require('fs');
     })
     await browser.close();
 })()
+
+module.exports = scraper

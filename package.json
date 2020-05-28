@@ -1,9 +1,9 @@
 {
   "name": "headliner-scraper",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "scraper.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node scraper.js"
   },
   "repository": "https://github.com/jondscott21/Headliner-scraper.git",
   "author": "Jonathan Scott <jonathan.scott@gmail.com>",
