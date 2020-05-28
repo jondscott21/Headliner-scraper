@@ -48,7 +48,7 @@ const scraper = (async () => {
     console.log(data);
 
     debugger;
-    await fs.writeFile('test.json', JSON.stringify(data, null, 2), (err) => {
+    await fs.writeFile('data.json', JSON.stringify(data, null, 2), (err) => {
         if(err) {
             console.log(err)
         }

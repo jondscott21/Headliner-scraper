@@ -7,13 +7,13 @@ const scraper = require('../scraper')
 // admin.initializeApp();
 // const db = admin.firestore()
 
-// const chronJob = functions.pubsub
-// // .schedule('0 0,6,12,18 * * *').onRun(context => {
-// .schedule('* * * * *').onRun(context => {
-//     scraper()
-// })
-// chronJob()
-scraper
+const chronJob = functions.pubsub
+// .schedule('0 0,6,12,18 * * *').onRun(context => {
+.schedule('* * * * *').onRun(async (context) => {
+    // scraper()
+    await scraper
+})
+chronJob()
 
 
 // // Create and Deploy Your First Cloud Functions
