@@ -4,16 +4,18 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const scraper = require('../scraper')
 
-// admin.initializeApp();
-// const db = admin.firestore()
+admin.initializeApp();
+const db = admin.firestore()
 
-const chronJob = functions.pubsub
+exports.chronJob = functions.pubsub
 // .schedule('0 0,6,12,18 * * *').onRun(context => {
 .schedule('* * * * *').onRun(async (context) => {
     // scraper()
     await scraper
+    // console.log('here')
+    return null
 })
-chronJob()
+// cronJob()
 
 
 // // Create and Deploy Your First Cloud Functions

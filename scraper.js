@@ -13,8 +13,11 @@ const scraper = (async () => {
     let CNNData = await page.evaluate(() => {
         let CNNHeadline = document.querySelector(".screaming-banner-text").innerText;
         // TODO trim number of headlines?
+        console.log('1')
         let CNNSubHeadlines1 = document.querySelector(".zn__column--idx-1").innerText;
+        console.log('2')
         let CNNSubHeadlines2 = document.querySelector(".zn__column--idx-2").innerText;
+        console.log('3')
         CNNSubHeadlines1 = CNNSubHeadlines1.split("\n")
         CNNSubHeadlines2 = CNNSubHeadlines2.split("\n")
         let CNNSubHeadlines = CNNSubHeadlines1.concat(CNNSubHeadlines2)
